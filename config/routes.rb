@@ -1,7 +1,9 @@
 Microplan::Application.routes.draw do
+  resources :messages
+
   devise_for :users
 
-  root :to => "home#index"
+  root :to => "messages#index"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
