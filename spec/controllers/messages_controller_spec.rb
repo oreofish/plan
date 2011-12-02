@@ -24,7 +24,7 @@ describe MessagesController do
   # Message. As you add validations to Message, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    { :content => 'test' }
   end
 
   describe "GET index" do

@@ -13,8 +13,8 @@
 require 'spec_helper'
 
 describe Message do
-  before(:each) do 
-    @msg = { 
+  def valid_msg
+    { 
       :user_id => 1,
       :content => 'test msg',
       :has_attachment => false
@@ -22,12 +22,18 @@ describe Message do
   end
   
   it "should create new msg" do 
-    Message.create!(@msg)
+    Message.create!(valid_msg)
+  end
+
+  it "should NOT create msg with empty content" do 
+    empty_content = ''
+    empty_msg = Message.new(valid_msg.merge(:content => empty_content))
+    empty_msg.should_not be_valid
   end
 
   it "should NOT create msg with too long content" do 
     long_content = 'a' * 141
-    long_msg = Message.new(@msg.merge(:content => long_content))
+    long_msg = Message.new(valid_msg.merge(:content => long_content))
     long_msg.should_not be_valid
   end
   
